@@ -1,5 +1,79 @@
 /* ON GbR – Main JS */
 
+/* ── PIN Overlay ── */
+(function () {
+  const PIN = '3819';
+  if (sessionStorage.getItem('pinOK') === '1') return;
+
+  let entered = '';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'pin-overlay';
+  overlay.innerHTML = `
+    <div class="pin-box" id="pin-box">
+      <img src="public/logo.png" alt="ON GbR" class="pin-box__logo">
+      <h2>Demo-Zugang</h2>
+      <p>Bitte PIN eingeben</p>
+      <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot" id="d0"></div>
+        <div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div>
+        <div class="pin-dot" id="d3"></div>
+      </div>
+      <div class="pin-keypad">
+        ${[1,2,3,4,5,6,7,8,9].map(n =>
+          `<button class="pin-key" data-n="${n}">${n}</button>`
+        ).join('')}
+        <button class="pin-key pin-key--del" data-n="del">⌫</button>
+        <button class="pin-key" data-n="0">0</button>
+        <div></div>
+      </div>
+      <div class="pin-error" id="pin-error"></div>
+    </div>`;
+  document.body.prepend(overlay);
+
+  function updateDots() {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('d' + i).classList.toggle('filled', i < entered.length);
+    }
+  }
+
+  function handleKey(val) {
+    const box = document.getElementById('pin-box');
+    const err = document.getElementById('pin-error');
+    if (val === 'del') {
+      entered = entered.slice(0, -1);
+    } else if (entered.length < 4) {
+      entered += val;
+    }
+    err.textContent = '';
+    updateDots();
+    if (entered.length === 4) {
+      if (entered === PIN) {
+        sessionStorage.setItem('pinOK', '1');
+        overlay.remove();
+      } else {
+        box.classList.add('shake');
+        box.addEventListener('animationend', () => box.classList.remove('shake'), { once: true });
+        err.textContent = 'Falscher PIN – bitte erneut versuchen.';
+        entered = '';
+        updateDots();
+      }
+    }
+  }
+
+  overlay.addEventListener('click', e => {
+    const n = e.target.closest('[data-n]')?.dataset.n;
+    if (n !== undefined) handleKey(n);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('pin-box')) return;
+    if (e.key >= '0' && e.key <= '9') handleKey(e.key);
+    if (e.key === 'Backspace') handleKey('del');
+  });
+}());
+
 /* ── Mobile nav toggle ── */
 const navToggle = document.getElementById('nav-toggle');
 const navMenu   = document.getElementById('nav-menu');
