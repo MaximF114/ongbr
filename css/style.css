@@ -216,6 +216,10 @@ p:last-child { margin-bottom: 0; }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: none;
+}
+@media (min-width: 768px) {
+  .nav__logo span { display: block; }
 }
 .nav__logo-img {
   height: 40px;
