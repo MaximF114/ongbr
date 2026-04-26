@@ -437,6 +437,10 @@ p:last-child { margin-bottom: 0; }
 .footer__legal a { color: rgba(255,255,255,.45); transition: color .2s; }
 .footer__legal a:hover { color: #fff; }
 
+.footer__sheerfield { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.08); margin-top: 1rem; }
+.footer__sheerfield-logo { height: 28px; width: auto; opacity: .55; transition: opacity .2s; display: inline-block; }
+.footer__sheerfield a:hover .footer__sheerfield-logo { opacity: 1; }
+
 /* ── Utilities ── */
 .text-center { text-align: center; }
 .text-muted  { color: var(--color-muted); }
