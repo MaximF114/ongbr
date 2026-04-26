@@ -217,12 +217,14 @@ p:last-child { margin-bottom: 0; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.nav__logo-badge {
-  width: 38px; height: 38px;
-  background: var(--color-primary);
+.nav__logo-img {
+  display: inline-block;
+  width: 40px; height: 40px;
   border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 800; font-size: 1rem; letter-spacing: -.5px;
+  flex-shrink: 0;
+  background: url('../public/logo.png') no-repeat;
+  background-size: 190px;
+  background-position: -127px -104px;
 }
 .nav__menu {
   display: none;
@@ -415,7 +417,7 @@ p:last-child { margin-bottom: 0; }
 @media (min-width: 900px)  { .footer__grid { grid-template-columns: 2fr 1fr 1fr 1.25fr; } }
 
 .footer__brand  { display: flex; align-items: center; gap: .75rem; color: #fff; font-weight: 700; font-size: 1.0625rem; margin-bottom: 1rem; }
-.footer__badge  { width: 36px; height: 36px; background: var(--color-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9375rem; color: #fff; }
+.footer__logo-img { display: inline-block; width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; background: url('../public/logo.png') no-repeat; background-size: 171px; background-position: -115px -94px; }
 .footer__tagline { font-size: .875rem; margin-bottom: 1.25rem; }
 .footer__contact-item { display: flex; gap: .5rem; font-size: .875rem; margin-bottom: .5rem; }
 .footer__contact-item a { color: rgba(255,255,255,.65); transition: color .2s; }
